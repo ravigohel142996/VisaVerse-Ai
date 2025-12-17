@@ -122,14 +122,21 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
+# Initialize session state for page navigation
+if 'page' not in st.session_state:
+    st.session_state.page = "Home"
+
 # Sidebar navigation
 with st.sidebar:
     st.markdown("## 🧭 Navigation")
     page = st.radio(
         "",
         ["Home", "Visa Assistant", "Document Checker", "Cultural Guide"],
+        index=["Home", "Visa Assistant", "Document Checker", "Cultural Guide"].index(st.session_state.page),
         label_visibility="collapsed"
     )
+    # Update session state when radio button changes
+    st.session_state.page = page
     
     st.markdown("---")
     st.markdown("### About")
@@ -142,7 +149,7 @@ with st.sidebar:
     st.markdown("- [Contact](#)")
 
 # Hero Section
-if page == "Home":
+if st.session_state.page == "Home":
     st.markdown("""
         <div class="hero">
             <h1>✈️ VisaVerse Copilot</h1>
@@ -196,7 +203,7 @@ if page == "Home":
         st.markdown("Support for visa applications across 150+ countries.")
 
 # Visa & Work Eligibility Assistant
-elif page == "Visa Assistant":
+elif st.session_state.page == "Visa Assistant":
     st.markdown("# 🌍 Visa & Work Eligibility Assistant")
     st.markdown("Answer a few questions to get personalized visa recommendations.")
     
@@ -289,7 +296,7 @@ elif page == "Visa Assistant":
                     st.info("💡 **Next Steps:** Review the document requirements and start preparing your application.")
 
 # Document Readiness Checker
-elif page == "Document Checker":
+elif st.session_state.page == "Document Checker":
     st.markdown("# 📄 Document Readiness Checker")
     st.markdown("Ensure you have all required documents before submitting your application.")
     
@@ -372,7 +379,7 @@ elif page == "Document Checker":
                 st.warning("⚠️ You need to prepare more documents before applying.")
 
 # Cultural & Communication Guide
-elif page == "Cultural Guide":
+elif st.session_state.page == "Cultural Guide":
     st.markdown("# 🤝 Cultural & Communication Guide")
     st.markdown("Navigate cultural differences and communicate effectively in your destination country.")
     
