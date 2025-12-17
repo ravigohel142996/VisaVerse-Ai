@@ -1,0 +1,155 @@
+{
+  "visa_types": {
+    "skilled_worker": {
+      "name": "Skilled Worker Visa",
+      "countries": ["United States", "United Kingdom", "Canada", "Australia", "Germany"],
+      "processing_time": "3-6 weeks",
+      "validity": "Up to 5 years",
+      "requirements": [
+        "Valid job offer from licensed sponsor",
+        "Meet minimum skill level (RQF level 3 or equivalent)",
+        "Minimum salary threshold",
+        "English language proficiency",
+        "Certificate of Sponsorship"
+      ],
+      "success_factors": {
+        "high_demand_occupation": 0.3,
+        "years_experience": 0.25,
+        "education_level": 0.2,
+        "salary_level": 0.15,
+        "english_proficiency": 0.1
+      }
+    },
+    "student": {
+      "name": "Student Visa",
+      "countries": ["United States", "United Kingdom", "Canada", "Australia", "Germany"],
+      "processing_time": "2-4 weeks",
+      "validity": "Duration of course + 4-6 months",
+      "requirements": [
+        "Acceptance letter from accredited institution",
+        "Proof of financial means",
+        "English language test (IELTS/TOEFL)",
+        "Academic transcripts",
+        "Statement of purpose"
+      ],
+      "success_factors": {
+        "institution_ranking": 0.3,
+        "financial_proof": 0.3,
+        "academic_record": 0.25,
+        "language_score": 0.15
+      }
+    },
+    "tourist": {
+      "name": "Tourist/Visitor Visa",
+      "countries": ["United States", "United Kingdom", "Canada", "Australia", "Germany", "India", "Japan"],
+      "processing_time": "1-3 weeks",
+      "validity": "6 months to 10 years (multiple entry)",
+      "requirements": [
+        "Valid passport",
+        "Proof of financial means",
+        "Travel itinerary",
+        "Hotel bookings or invitation letter",
+        "Return ticket"
+      ],
+      "success_factors": {
+        "travel_history": 0.3,
+        "financial_stability": 0.3,
+        "ties_to_home": 0.25,
+        "purpose_clarity": 0.15
+      }
+    },
+    "business": {
+      "name": "Business Visa",
+      "countries": ["United States", "United Kingdom", "Canada", "Australia", "Germany", "India", "Japan"],
+      "processing_time": "1-2 weeks",
+      "validity": "6 months to 5 years",
+      "requirements": [
+        "Business invitation letter",
+        "Company registration documents",
+        "Proof of business activities",
+        "Financial statements",
+        "Travel itinerary"
+      ],
+      "success_factors": {
+        "company_legitimacy": 0.35,
+        "business_purpose": 0.3,
+        "financial_stability": 0.2,
+        "travel_history": 0.15
+      }
+    },
+    "intra_company_transfer": {
+      "name": "Intra-Company Transfer Visa",
+      "countries": ["United States", "United Kingdom", "Canada", "Australia"],
+      "processing_time": "2-4 weeks",
+      "validity": "Up to 5 years",
+      "requirements": [
+        "Employment with multinational company",
+        "Minimum 1 year employment with same employer",
+        "Transfer to related entity",
+        "Specialized knowledge or managerial role",
+        "Certificate of Sponsorship"
+      ],
+      "success_factors": {
+        "company_size": 0.3,
+        "role_seniority": 0.3,
+        "years_with_company": 0.25,
+        "specialized_skills": 0.15
+      }
+    }
+  },
+  "country_specific_info": {
+    "United States": {
+      "common_visas": ["H-1B", "L-1", "F-1", "B-1/B-2"],
+      "processing_authority": "USCIS",
+      "average_approval_rate": 0.85,
+      "special_notes": "H-1B has annual cap; premium processing available for additional fee"
+    },
+    "United Kingdom": {
+      "common_visas": ["Skilled Worker", "Student", "Visitor", "Global Talent"],
+      "processing_authority": "UK Visas and Immigration",
+      "average_approval_rate": 0.88,
+      "special_notes": "Points-based immigration system; IHS surcharge required"
+    },
+    "Canada": {
+      "common_visas": ["Express Entry", "Study Permit", "Visitor Visa", "Work Permit"],
+      "processing_authority": "IRCC",
+      "average_approval_rate": 0.82,
+      "special_notes": "Express Entry uses CRS scoring system; Provincial Nominee Programs available"
+    },
+    "Australia": {
+      "common_visas": ["Skilled Independent", "Temporary Skill Shortage", "Student", "Visitor"],
+      "processing_authority": "Department of Home Affairs",
+      "average_approval_rate": 0.80,
+      "special_notes": "Skills assessment required for most work visas; points test system"
+    },
+    "Germany": {
+      "common_visas": ["EU Blue Card", "Job Seeker", "Student", "Business"],
+      "processing_authority": "German Embassy/Consulate",
+      "average_approval_rate": 0.87,
+      "special_notes": "EU Blue Card for highly qualified workers; knowledge of German helpful but not always required"
+    }
+  },
+  "eligibility_criteria": {
+    "education_points": {
+      "High School": 10,
+      "Bachelor's Degree": 25,
+      "Master's Degree": 35,
+      "PhD": 45
+    },
+    "experience_points": {
+      "0-2": 5,
+      "3-5": 15,
+      "6-10": 25,
+      "11-15": 30,
+      "16+": 35
+    },
+    "age_points": {
+      "18-25": 30,
+      "26-30": 35,
+      "31-35": 30,
+      "36-40": 25,
+      "41-45": 15,
+      "46+": 5
+    }
+  }
+}

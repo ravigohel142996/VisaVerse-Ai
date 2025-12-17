@@ -1,0 +1,10 @@
+# VisaVerse Copilot - Assets Directory
+
+This directory is reserved for future UI assets such as:
+- Logo images
+- Icons
+- Illustrations
+- Screenshots
+- Other visual assets
+
+Currently, the application uses emoji and CSS-only styling to maintain simplicity and avoid dependencies.

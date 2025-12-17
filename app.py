@@ -4,11 +4,33 @@ A clean, minimal Streamlit web app for visa assistance, document checking, and c
 """
 
 import streamlit as st
+from services.visa_service import VisaService
+from services.document_service import DocumentService
+from services.culture_service import CultureService
+from utils.constants import *
+from utils.helpers import format_requirements_list, get_readiness_message, get_success_rate_emoji
+
+# Initialize services
+@st.cache_resource
+def get_visa_service():
+    return VisaService()
+
+@st.cache_resource
+def get_document_service():
+    return DocumentService()
+
+@st.cache_resource
+def get_culture_service():
+    return CultureService()
+
+visa_service = get_visa_service()
+document_service = get_document_service()
+culture_service = get_culture_service()
 
 # Page configuration
 st.set_page_config(
-    page_title="VisaVerse Copilot",
-    page_icon="✈️",
+    page_title=APP_NAME,
+    page_icon=APP_ICON,
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -124,10 +146,10 @@ st.markdown("""
 
 # Initialize session state for page navigation
 if 'page' not in st.session_state:
-    st.session_state.page = "Home"
+    st.session_state.page = PAGE_HOME
 
-# Define page list
-PAGES = ["Home", "Visa Assistant", "Document Checker", "Cultural Guide"]
+# Define page list (using constants)
+# PAGES is now imported from constants
 
 # Sidebar navigation
 with st.sidebar:
@@ -152,7 +174,7 @@ with st.sidebar:
     st.markdown("- [Contact](#)")
 
 # Hero Section
-if st.session_state.page == "Home":
+if st.session_state.page == PAGE_HOME:
     st.markdown("""
         <div class="hero">
             <h1>✈️ VisaVerse Copilot</h1>
@@ -167,21 +189,21 @@ if st.session_state.page == "Home":
         st.markdown("### 🌍 Visa Assistant")
         st.markdown("Get personalized visa and work eligibility guidance based on your profile.")
         if st.button("Get Started →", key="visa"):
-            st.session_state.page = "Visa Assistant"
+            st.session_state.page = PAGE_VISA
             st.rerun()
     
     with col2:
         st.markdown("### 📄 Document Checker")
         st.markdown("Verify your documents are complete and ready for submission.")
         if st.button("Check Now →", key="docs"):
-            st.session_state.page = "Document Checker"
+            st.session_state.page = PAGE_DOCUMENTS
             st.rerun()
     
     with col3:
         st.markdown("### 🤝 Cultural Guide")
         st.markdown("Navigate cultural differences and communication styles with confidence.")
         if st.button("Learn More →", key="culture"):
-            st.session_state.page = "Cultural Guide"
+            st.session_state.page = PAGE_CULTURE
             st.rerun()
     
     st.markdown("---")
@@ -206,7 +228,7 @@ if st.session_state.page == "Home":
         st.markdown("Support for visa applications across 150+ countries.")
 
 # Visa & Work Eligibility Assistant
-elif st.session_state.page == "Visa Assistant":
+elif st.session_state.page == PAGE_VISA:
     st.markdown("# 🌍 Visa & Work Eligibility Assistant")
     st.markdown("Answer a few questions to get personalized visa recommendations.")
     
@@ -220,28 +242,28 @@ elif st.session_state.page == "Visa Assistant":
         with col1:
             current_country = st.selectbox(
                 "Current Country of Residence",
-                ["Select...", "United States", "United Kingdom", "Canada", "India", "Germany", "Australia", "Other"]
+                COUNTRIES
             )
             
             citizenship = st.selectbox(
                 "Citizenship",
-                ["Select...", "United States", "United Kingdom", "Canada", "India", "Germany", "Australia", "Other"]
+                COUNTRIES
             )
         
         with col2:
             destination = st.selectbox(
                 "Destination Country",
-                ["Select...", "United States", "United Kingdom", "Canada", "India", "Germany", "Australia", "Other"]
+                COUNTRIES
             )
             
             purpose = st.selectbox(
                 "Purpose of Travel",
-                ["Select...", "Work/Employment", "Study", "Business", "Tourism", "Family", "Other"]
+                TRAVEL_PURPOSES
             )
         
         education = st.selectbox(
             "Highest Education Level",
-            ["Select...", "High School", "Bachelor's Degree", "Master's Degree", "PhD", "Other"]
+            EDUCATION_LEVELS
         )
         
         work_experience = st.slider("Years of Work Experience", 0, 30, 5)
@@ -251,55 +273,58 @@ elif st.session_state.page == "Visa Assistant":
         submitted = st.form_submit_button("Get Visa Recommendations", use_container_width=True)
         
         if submitted:
-            if current_country == "Select..." or destination == "Select..." or citizenship == "Select...":
+            if current_country == "Select..." or destination == "Select..." or citizenship == "Select..." or purpose == "Select...":
                 st.error("Please fill in all required fields.")
             else:
                 with st.spinner("Analyzing your profile..."):
+                    # Create profile for service
+                    profile = {
+                        'citizenship': citizenship,
+                        'destination': destination,
+                        'purpose': purpose,
+                        'education': education,
+                        'work_experience': work_experience,
+                        'job_title': job_title
+                    }
+                    
+                    # Get recommendations from service
+                    recommendations = visa_service.get_visa_recommendations(profile)
+                    
                     st.success("✓ Profile analyzed successfully!")
                     
                     st.markdown("---")
                     st.markdown("### 📋 Recommended Visa Options")
                     
-                    # Sample recommendations based on purpose
-                    if purpose == "Work/Employment":
-                        st.markdown("#### 1. Skilled Worker Visa")
-                        st.markdown(f"""
-                        - **Processing Time:** 3-6 weeks
-                        - **Validity:** Up to 5 years
-                        - **Requirements:** Job offer from licensed sponsor, meet skill level threshold
-                        - **Success Rate:** High (based on your {work_experience} years of experience)
-                        """)
-                        
-                        st.markdown("#### 2. Intra-company Transfer")
-                        st.markdown("""
-                        - **Processing Time:** 2-4 weeks
-                        - **Validity:** Up to 5 years
-                        - **Requirements:** Current employment with multinational company
-                        - **Success Rate:** Very High
-                        """)
-                    
-                    elif purpose == "Study":
-                        st.markdown("#### 1. Student Visa")
-                        st.markdown("""
-                        - **Processing Time:** 3-4 weeks
-                        - **Validity:** Duration of course + 4 months
-                        - **Requirements:** Acceptance letter, proof of funds, English proficiency
-                        - **Success Rate:** High
-                        """)
-                    
+                    if recommendations:
+                        for i, rec in enumerate(recommendations, 1):
+                            st.markdown(f"#### {i}. {rec['name']}")
+                            st.markdown(f"""
+                            - **Processing Time:** {rec['processing_time']}
+                            - **Validity:** {rec['validity']}
+                            - **Eligibility Score:** {rec['eligibility_score']}/100
+                            - **Success Rate:** {get_success_rate_emoji(rec['success_rate'])} {rec['success_rate']}
+                            """)
+                            
+                            with st.expander("View Requirements"):
+                                st.markdown(format_requirements_list(rec['requirements']))
                     else:
-                        st.markdown("#### 1. Standard Visitor Visa")
-                        st.markdown("""
-                        - **Processing Time:** 2-3 weeks
-                        - **Validity:** 6 months
-                        - **Requirements:** Proof of funds, return ticket, purpose of visit
-                        - **Success Rate:** High
+                        st.info("No specific visa recommendations available for this profile. Please consult with immigration professionals.")
+                    
+                    # Show country-specific info
+                    country_info = visa_service.get_country_info(destination)
+                    if country_info:
+                        st.markdown("---")
+                        st.markdown(f"### 🌍 {destination} - Key Information")
+                        st.markdown(f"""
+                        - **Processing Authority:** {country_info.get('processing_authority', 'N/A')}
+                        - **Common Visa Types:** {', '.join(country_info.get('common_visas', []))}
+                        - **Special Notes:** {country_info.get('special_notes', 'N/A')}
                         """)
                     
                     st.info("💡 **Next Steps:** Review the document requirements and start preparing your application.")
 
 # Document Readiness Checker
-elif st.session_state.page == "Document Checker":
+elif st.session_state.page == PAGE_DOCUMENTS:
     st.markdown("# 📄 Document Readiness Checker")
     st.markdown("Ensure you have all required documents before submitting your application.")
     
@@ -307,90 +332,65 @@ elif st.session_state.page == "Document Checker":
     
     visa_type = st.selectbox(
         "Select Visa Type",
-        ["Select...", "Skilled Worker", "Student", "Tourist", "Business", "Family", "Other"]
+        VISA_TYPES
     )
     
     if visa_type != "Select...":
+        # Get requirements from service
+        requirements = document_service.get_required_documents(visa_type)
+        
         st.markdown("### 📋 Required Documents Checklist")
         
-        # Common documents for all visa types
+        # Track checked documents
+        checked_docs = {}
+        
+        # Essential documents
         st.markdown("#### Essential Documents")
+        for doc in requirements.get('essential', []):
+            checked_docs[doc] = st.checkbox(doc, key=f"essential_{doc}")
         
-        passport = st.checkbox("Valid passport (minimum 6 months validity)")
-        photos = st.checkbox("Recent passport-sized photographs")
-        application = st.checkbox("Completed visa application form")
-        fee = st.checkbox("Visa application fee payment receipt")
-        
-        # Visa-specific documents
+        # Specific documents
         st.markdown(f"#### {visa_type} Visa Specific Documents")
-        
-        if visa_type == "Skilled Worker":
-            sponsor = st.checkbox("Certificate of Sponsorship from employer")
-            proof_funds = st.checkbox("Proof of financial means")
-            qualifications = st.checkbox("Educational certificates and transcripts")
-            experience = st.checkbox("Work experience letters")
-            english = st.checkbox("English language test results (IELTS/TOEFL)")
-            
-        elif visa_type == "Student":
-            acceptance = st.checkbox("University acceptance letter")
-            proof_funds_student = st.checkbox("Proof of tuition fees and living expenses")
-            academic = st.checkbox("Previous academic records")
-            english_student = st.checkbox("English language proficiency test")
-            
-        elif visa_type == "Tourist":
-            itinerary = st.checkbox("Travel itinerary")
-            accommodation = st.checkbox("Hotel bookings or invitation letter")
-            proof_funds_tourist = st.checkbox("Bank statements (last 3 months)")
-            
-        elif visa_type == "Business":
-            invitation = st.checkbox("Business invitation letter")
-            company_docs = st.checkbox("Company registration documents")
-            proof_funds_business = st.checkbox("Proof of financial stability")
+        for doc in requirements.get('specific', []):
+            checked_docs[doc] = st.checkbox(doc, key=f"specific_{doc}")
         
         st.markdown("---")
         
         if st.button("Check Readiness", use_container_width=True):
-            # Count checked items
-            total_items = sum([passport, photos, application, fee])
-            
-            if visa_type == "Skilled Worker":
-                total_items += sum([sponsor, proof_funds, qualifications, experience, english])
-                max_items = 9
-            elif visa_type == "Student":
-                total_items += sum([acceptance, proof_funds_student, academic, english_student])
-                max_items = 8
-            elif visa_type == "Tourist":
-                total_items += sum([itinerary, accommodation, proof_funds_tourist])
-                max_items = 7
-            elif visa_type == "Business":
-                total_items += sum([invitation, company_docs, proof_funds_business])
-                max_items = 7
-            else:
-                max_items = 4
-            
-            progress_pct = (total_items / max_items) * 100
+            # Calculate readiness using service
+            readiness = document_service.calculate_readiness_score(visa_type, checked_docs)
             
             st.markdown("### 📊 Readiness Score")
-            st.progress(progress_pct / 100)
-            st.markdown(f"**{progress_pct:.0f}%** complete ({total_items}/{max_items} documents)")
+            st.progress(readiness['percentage'] / 100)
+            st.markdown(f"**{readiness['score']}%** complete ({readiness['completed']}/{readiness['total']} documents)")
             
-            if progress_pct == 100:
-                st.success("✓ Congratulations! You have all required documents ready.")
-            elif progress_pct >= 70:
-                st.info("You're almost there! Complete the remaining documents to submit your application.")
+            message = get_readiness_message(readiness['percentage'])
+            
+            if readiness['percentage'] == 100:
+                st.success(message)
+            elif readiness['percentage'] >= 70:
+                st.info(message)
             else:
-                st.warning("⚠️ You need to prepare more documents before applying.")
+                st.warning(message)
+            
+            if readiness['missing']:
+                with st.expander("Missing Documents"):
+                    st.markdown(format_requirements_list(readiness['missing']))
 
 # Cultural & Communication Guide
-elif st.session_state.page == "Cultural Guide":
+elif st.session_state.page == PAGE_CULTURE:
     st.markdown("# 🤝 Cultural & Communication Guide")
     st.markdown("Navigate cultural differences and communicate effectively in your destination country.")
     
     st.markdown("---")
     
+    # Get available countries from service
+    available_countries = culture_service.get_available_countries()
+    country_options = ["Select..."] + available_countries
+    
     destination_country = st.selectbox(
         "Select Your Destination Country",
-        ["Select...", "United States", "United Kingdom", "Canada", "Germany", "Japan", "India", "Australia", "Other"]
+        country_options
     )
     
     if destination_country != "Select...":
@@ -398,130 +398,89 @@ elif st.session_state.page == "Cultural Guide":
         
         tab1, tab2, tab3, tab4 = st.tabs(["Workplace", "Communication", "Etiquette", "Tips"])
         
+        # Get country data from service
+        workplace = culture_service.get_workplace_culture(destination_country)
+        communication = culture_service.get_communication_style(destination_country)
+        etiquette = culture_service.get_business_etiquette(destination_country)
+        tips = culture_service.get_cultural_tips(destination_country)
+        
         with tab1:
             st.markdown("#### Workplace Culture")
-            
-            if destination_country == "United States":
-                st.markdown("""
-                - **Work Style:** Direct, results-oriented, fast-paced
-                - **Hierarchy:** Relatively flat, first-name basis common
-                - **Meetings:** Agenda-driven, punctuality valued
-                - **Work-Life Balance:** Varies by company, generally work-focused
+            if workplace:
+                st.markdown(f"""
+                - **Work Style:** {workplace.get('work_style', 'N/A')}
+                - **Hierarchy:** {workplace.get('hierarchy', 'N/A')}
+                - **Meetings:** {workplace.get('meeting_culture', 'N/A')}
+                - **Work-Life Balance:** {workplace.get('work_life_balance', 'N/A')}
+                - **Decision Making:** {workplace.get('decision_making', 'N/A')}
                 """)
-            
-            elif destination_country == "United Kingdom":
-                st.markdown("""
-                - **Work Style:** Professional, polite, indirect communication
-                - **Hierarchy:** Moderate, respect for titles
-                - **Meetings:** Structured, punctuality important
-                - **Work-Life Balance:** Improving, good vacation allowance
-                """)
-            
-            elif destination_country == "Japan":
-                st.markdown("""
-                - **Work Style:** Group-oriented, consensus-based, detail-focused
-                - **Hierarchy:** Strict, seniority-based respect
-                - **Meetings:** Formal, decisions made beforehand
-                - **Work-Life Balance:** Long hours common, changing gradually
-                """)
-            
             else:
-                st.markdown("""
-                - **Work Style:** Professional environment with local customs
-                - **Hierarchy:** Varies by industry and company
-                - **Meetings:** Follow local business norms
-                - **Work-Life Balance:** Research local expectations
-                """)
+                st.info("Workplace culture information not available for this country.")
         
         with tab2:
             st.markdown("#### Communication Style")
-            
-            if destination_country in ["United States", "Australia"]:
-                st.markdown("""
-                - **Directness:** Very direct, explicit communication
-                - **Small Talk:** Common and encouraged
-                - **Feedback:** Direct and frequent
-                - **Email:** Casual but professional
+            if communication:
+                st.markdown(f"""
+                - **Directness:** {communication.get('directness', 'N/A')}
+                - **Small Talk:** {communication.get('small_talk', 'N/A')}
+                - **Feedback:** {communication.get('feedback', 'N/A')}
+                - **Email:** {communication.get('email_tone', 'N/A')}
+                - **Conflict Resolution:** {communication.get('conflict_resolution', 'N/A')}
                 """)
-            
-            elif destination_country in ["United Kingdom"]:
-                st.markdown("""
-                - **Directness:** Indirect, polite circumlocution
-                - **Small Talk:** Weather, sports, current events
-                - **Feedback:** Softened with positive framing
-                - **Email:** Formal and polite
-                """)
-            
-            elif destination_country in ["Japan", "India"]:
-                st.markdown("""
-                - **Directness:** Indirect, context-heavy
-                - **Small Talk:** Important for relationship building
-                - **Feedback:** Very indirect, saving face important
-                - **Email:** Formal, respectful
-                """)
-            
             else:
-                st.markdown("""
-                - **Directness:** Learn local communication norms
-                - **Small Talk:** Observe and adapt
-                - **Feedback:** Understand cultural context
-                - **Email:** When in doubt, be formal
-                """)
+                st.info("Communication style information not available for this country.")
         
         with tab3:
             st.markdown("#### Business Etiquette")
-            
-            st.markdown("""
-            **Greetings:**
-            - Research appropriate greetings (handshake, bow, etc.)
-            - Use proper titles until invited to use first names
-            - Be aware of personal space preferences
-            
-            **Meetings:**
-            - Arrive on time (or early in some cultures)
-            - Dress code: business professional unless told otherwise
-            - Bring business cards (essential in some cultures)
-            
-            **Dining:**
-            - Understand table manners and customs
-            - Know who pays and tipping culture
-            - Be aware of dietary restrictions and preferences
-            """)
+            if etiquette:
+                st.markdown(f"""
+                **Greetings:**
+                {etiquette.get('greetings', 'N/A')}
+                
+                **Dress Code:**
+                {etiquette.get('dress_code', 'N/A')}
+                
+                **Punctuality:**
+                {etiquette.get('punctuality', 'N/A')}
+                
+                **Business Cards:**
+                {etiquette.get('business_cards', 'N/A')}
+                
+                **Dining:**
+                {etiquette.get('dining', 'N/A')}
+                """)
+            else:
+                st.info("Business etiquette information not available for this country.")
         
         with tab4:
             st.markdown("#### Quick Tips")
             
-            st.markdown("""
-            ✓ **Do:**
-            - Research and respect local customs
-            - Observe before acting in unfamiliar situations
-            - Ask questions when unsure
-            - Show genuine interest in the culture
-            - Be patient and flexible
+            if tips:
+                st.markdown("**Do's and Don'ts:**")
+                for tip in tips:
+                    st.markdown(f"- {tip}")
+            else:
+                st.info("Cultural tips not available for this country.")
             
-            ✗ **Don't:**
-            - Assume your way is the right way
-            - Make cultural comparisons or criticisms
-            - Rush into familiar behavior
-            - Ignore local holidays and celebrations
-            - Stereotype or generalize
-            """)
+            # Show general adaptation tips
+            st.markdown("---")
+            st.markdown("#### General Adaptation Tips")
+            adaptation_tips = culture_service.get_cultural_adaptation_tips()
+            for tip in adaptation_tips:
+                st.markdown(f"✓ {tip}")
             
             st.info("💡 **Remember:** Cultural adaptation takes time. Be patient with yourself and others.")
 
 # Footer with disclaimer
 st.markdown("---")
-st.markdown("""
+st.markdown(f"""
     <div class="disclaimer">
-        <strong>⚠️ Disclaimer:</strong> VisaVerse Copilot provides general information and guidance only. 
-        This is not legal advice. Visa requirements and policies change frequently. 
-        Always verify information with official government sources and consult with qualified immigration professionals 
-        for your specific situation.
+        <strong>{DISCLAIMER_TEXT}</strong>
     </div>
 """, unsafe_allow_html=True)
 
 st.markdown("<br>", unsafe_allow_html=True)
 st.markdown(
-    "<div style='text-align: center; color: #999; font-size: 0.9rem;'>© 2024 VisaVerse Copilot. Built for the VisaVerse AI Hackathon.</div>",
+    f"<div style='text-align: center; color: #999; font-size: 0.9rem;'>{FOOTER_TEXT}</div>",
     unsafe_allow_html=True
 )
