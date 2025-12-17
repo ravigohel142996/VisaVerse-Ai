@@ -139,6 +139,7 @@ def truncate_text(text, max_length=100, suffix="..."):
 def safe_get(dictionary, keys, default=None):
     """
     Safely get nested dictionary value
+    Reserved for future use with complex nested data structures
     
     Args:
         dictionary (dict): Dictionary to search
@@ -160,6 +161,7 @@ def safe_get(dictionary, keys, default=None):
 def format_percentage(value, decimal_places=0):
     """
     Format a value as a percentage
+    Reserved for future use in analytics and reporting features
     
     Args:
         value (float): Value to format (0-100)
@@ -174,6 +176,7 @@ def format_percentage(value, decimal_places=0):
 def create_display_dict(data, labels):
     """
     Create a display-friendly dictionary from data
+    Reserved for future use in data presentation features
     
     Args:
         data (dict): Source data dictionary

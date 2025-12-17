@@ -17,15 +17,27 @@ from utils.helpers import format_requirements_list, get_readiness_message, get_s
 # Initialize services
 @st.cache_resource
 def get_visa_service():
-    return VisaService()
+    try:
+        return VisaService()
+    except (FileNotFoundError, ValueError) as e:
+        st.error(f"Error loading visa service: {e}")
+        st.stop()
 
 @st.cache_resource
 def get_document_service():
-    return DocumentService()
+    try:
+        return DocumentService()
+    except Exception as e:
+        st.error(f"Error loading document service: {e}")
+        st.stop()
 
 @st.cache_resource
 def get_culture_service():
-    return CultureService()
+    try:
+        return CultureService()
+    except (FileNotFoundError, ValueError) as e:
+        st.error(f"Error loading culture service: {e}")
+        st.stop()
 
 visa_service = get_visa_service()
 document_service = get_document_service()

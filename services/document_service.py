@@ -2,6 +2,8 @@
 Document Service - Handles document checking and readiness validation
 """
 
+from utils.constants import MIN_RESUME_LENGTH, MIN_OFFER_LENGTH
+
 
 class DocumentService:
     def __init__(self):
@@ -157,7 +159,7 @@ class DocumentService:
         Returns:
             dict: Analysis results
         """
-        if not resume_text or len(resume_text.strip()) < 100:
+        if not resume_text or len(resume_text.strip()) < MIN_RESUME_LENGTH:
             return {
                 'score': 0,
                 'issues': ['Resume is too short or empty'],
@@ -214,7 +216,7 @@ class DocumentService:
         Returns:
             dict: Analysis results
         """
-        if not offer_text or len(offer_text.strip()) < 100:
+        if not offer_text or len(offer_text.strip()) < MIN_OFFER_LENGTH:
             return {
                 'score': 0,
                 'issues': ['Offer letter is too short or empty'],
