@@ -14,8 +14,13 @@ class CultureService:
     def _load_culture_data(self):
         """Load culture data from JSON file"""
         data_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data', 'culture_data.json')
-        with open(data_path, 'r', encoding='utf-8') as f:
-            return json.load(f)
+        try:
+            with open(data_path, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except FileNotFoundError:
+            raise FileNotFoundError(f"Culture data file not found at {data_path}. Please ensure data/culture_data.json exists.")
+        except json.JSONDecodeError as e:
+            raise ValueError(f"Invalid JSON in culture data file: {e}")
     
     def get_country_culture(self, country):
         """

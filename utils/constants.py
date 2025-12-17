@@ -76,12 +76,10 @@ CARD_SHADOW = "0 1px 3px rgba(0,0,0,0.08)"
 CARD_PADDING = "2rem"
 
 # Messages
-DISCLAIMER_TEXT = """
-⚠️ **Disclaimer:** VisaVerse Copilot provides general information and guidance only. 
+DISCLAIMER_TEXT = """⚠️ **Disclaimer:** VisaVerse Copilot provides general information and guidance only. 
 This is not legal advice. Visa requirements and policies change frequently. 
 Always verify information with official government sources and consult with qualified immigration professionals 
-for your specific situation.
-"""
+for your specific situation."""
 
 FOOTER_TEXT = "© 2024 VisaVerse Copilot. Built for the VisaVerse AI Hackathon."
 

@@ -7,7 +7,11 @@ import streamlit as st
 from services.visa_service import VisaService
 from services.document_service import DocumentService
 from services.culture_service import CultureService
-from utils.constants import *
+from utils.constants import (
+    APP_NAME, APP_ICON, PAGE_HOME, PAGE_VISA, PAGE_DOCUMENTS, PAGE_CULTURE,
+    PAGES, COUNTRIES, TRAVEL_PURPOSES, EDUCATION_LEVELS, VISA_TYPES,
+    DISCLAIMER_TEXT, FOOTER_TEXT
+)
 from utils.helpers import format_requirements_list, get_readiness_message, get_success_rate_emoji
 
 # Initialize services

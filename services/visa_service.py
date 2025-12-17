@@ -14,8 +14,13 @@ class VisaService:
     def _load_visa_data(self):
         """Load visa rules from JSON file"""
         data_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data', 'visa_rules.json')
-        with open(data_path, 'r', encoding='utf-8') as f:
-            return json.load(f)
+        try:
+            with open(data_path, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except FileNotFoundError:
+            raise FileNotFoundError(f"Visa data file not found at {data_path}. Please ensure data/visa_rules.json exists.")
+        except json.JSONDecodeError as e:
+            raise ValueError(f"Invalid JSON in visa data file: {e}")
     
     def get_visa_recommendations(self, profile):
         """
