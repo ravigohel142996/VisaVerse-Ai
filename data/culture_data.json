@@ -1,0 +1,263 @@
+{
+  "countries": {
+    "United States": {
+      "workplace_culture": {
+        "work_style": "Direct, results-oriented, fast-paced",
+        "hierarchy": "Relatively flat organizational structure, first-name basis common at all levels",
+        "meeting_culture": "Agenda-driven, punctuality highly valued, active participation expected",
+        "work_life_balance": "Varies by company and industry, generally work-focused with fewer vacation days (10-15 days typical)",
+        "decision_making": "Quick decisions, individual accountability emphasized"
+      },
+      "communication_style": {
+        "directness": "Very direct and explicit communication preferred",
+        "small_talk": "Common and encouraged, especially about sports, weather, and weekend plans",
+        "feedback": "Direct and frequent, both positive and negative",
+        "email_tone": "Casual but professional, quick responses expected",
+        "conflict_resolution": "Direct addressing of issues, open discussion encouraged"
+      },
+      "business_etiquette": {
+        "greetings": "Firm handshake with eye contact, casual greetings common",
+        "dress_code": "Business casual becoming more common, varies by industry (tech vs. finance)",
+        "punctuality": "Very important, arrive 5-10 minutes early for meetings",
+        "business_cards": "Less formal than in Asia, digital contact exchange common",
+        "dining": "Business lunches common, split bills or host pays, tipping 15-20% expected"
+      },
+      "time_zone": "Multiple time zones (EST, CST, MST, PST)",
+      "working_hours": "Typically 9 AM - 5 PM, but longer hours common in corporate settings",
+      "holidays": ["New Year's Day", "Independence Day (July 4)", "Thanksgiving", "Christmas"],
+      "tips": [
+        "Confidence and self-promotion are valued",
+        "Work-life integration rather than separation",
+        "Networking is crucial for career growth",
+        "Results and metrics highly emphasized",
+        "Meritocracy is the ideal, though not always the reality"
+      ]
+    },
+    "United Kingdom": {
+      "workplace_culture": {
+        "work_style": "Professional, polite, emphasis on proper procedure",
+        "hierarchy": "Moderate hierarchy, respect for titles and positions",
+        "meeting_culture": "Structured with agendas, punctuality important, minutes taken",
+        "work_life_balance": "Better than US, typically 25-28 days vacation plus bank holidays",
+        "decision_making": "Consultative approach, consensus-seeking"
+      },
+      "communication_style": {
+        "directness": "Indirect communication, understatement common, politeness valued",
+        "small_talk": "Essential, weather and sports (especially football) popular topics",
+        "feedback": "Softened with positive framing, criticism delivered gently",
+        "email_tone": "Formal and polite, proper greetings and closings",
+        "conflict_resolution": "Diplomatic approach, avoiding confrontation when possible"
+      },
+      "business_etiquette": {
+        "greetings": "Handshake with eye contact, wait to be invited to use first names",
+        "dress_code": "Business formal in traditional industries, smart casual in tech/creative",
+        "punctuality": "Very important, being late is considered rude",
+        "business_cards": "Exchange if relevant, not as ritualized as in Asia",
+        "dining": "Business dinners common, host typically pays, no need to tip if service charge included"
+      },
+      "time_zone": "GMT/BST",
+      "working_hours": "9 AM - 5:30 PM typical",
+      "holidays": ["New Year's Day", "Good Friday", "Easter Monday", "Christmas", "Boxing Day"],
+      "tips": [
+        "Humor and wit appreciated but keep it professional",
+        "Queue culture is serious - never skip the line",
+        "Tea breaks are social and work opportunities",
+        "Understatement is common - 'not bad' means 'very good'",
+        "Privacy is valued, don't ask overly personal questions"
+      ]
+    },
+    "Canada": {
+      "workplace_culture": {
+        "work_style": "Collaborative, polite, consensus-oriented",
+        "hierarchy": "Relatively flat, but respect for experience and expertise",
+        "meeting_culture": "Structured but friendly, everyone's input valued",
+        "work_life_balance": "Good balance valued, 10-15 days vacation minimum plus statutory holidays",
+        "decision_making": "Consensus-driven, thorough discussion before decisions"
+      },
+      "communication_style": {
+        "directness": "Moderately direct, more polite than US, less indirect than UK",
+        "small_talk": "Common and appreciated, hockey, weather, outdoor activities",
+        "feedback": "Constructive and balanced, delivered respectfully",
+        "email_tone": "Professional and friendly",
+        "conflict_resolution": "Diplomatic, seeking win-win solutions"
+      },
+      "business_etiquette": {
+        "greetings": "Handshake, maintain eye contact, friendly demeanor",
+        "dress_code": "Business casual common, varies by industry and region",
+        "punctuality": "Important, especially for meetings",
+        "business_cards": "Exchange when relevant, bilingual (English/French) in Quebec",
+        "dining": "Business lunches common, tipping 15-20% expected"
+      },
+      "time_zone": "Multiple time zones (EST to PST)",
+      "working_hours": "9 AM - 5 PM typical, flexible arrangements increasingly common",
+      "holidays": ["New Year's Day", "Canada Day (July 1)", "Thanksgiving (October)", "Christmas"],
+      "tips": [
+        "Multicultural awareness and inclusivity highly valued",
+        "Be aware of French language in Quebec",
+        "Modesty preferred over boastfulness",
+        "Environmental consciousness appreciated",
+        "Work-life balance is genuinely respected"
+      ]
+    },
+    "Germany": {
+      "workplace_culture": {
+        "work_style": "Thorough, structured, quality-focused, efficient",
+        "hierarchy": "Clear hierarchies, respect for titles and qualifications",
+        "meeting_culture": "Well-prepared, stick to agenda, punctuality crucial",
+        "work_life_balance": "Highly valued, 25-30 days vacation typical, strict separation of work and personal time",
+        "decision_making": "Data-driven, thorough analysis, consensus important"
+      },
+      "communication_style": {
+        "directness": "Very direct and frank, no sugarcoating",
+        "small_talk": "Limited, get to business quickly",
+        "feedback": "Direct and honest, focused on improvement",
+        "email_tone": "Formal, use titles (Dr., Prof.), structured",
+        "conflict_resolution": "Direct discussion of issues, fact-based arguments"
+      },
+      "business_etiquette": {
+        "greetings": "Firm handshake, use titles and surnames until invited otherwise",
+        "dress_code": "Conservative business formal, quality over flash",
+        "punctuality": "Absolutely essential, arrive exactly on time",
+        "business_cards": "Include academic titles if you have them",
+        "dining": "Business dinners less common than lunches, formal table manners"
+      },
+      "time_zone": "CET/CEST",
+      "working_hours": "8 AM - 5 PM, but leaving on time is normal and expected",
+      "holidays": ["New Year's Day", "Good Friday", "Easter Monday", "Labor Day (May 1)", "Christmas"],
+      "tips": [
+        "Preparation and planning are highly valued",
+        "Privacy is important - office doors often closed",
+        "Rules and procedures are taken seriously",
+        "Engineering and technical expertise highly respected",
+        "Don't call or email outside working hours unless urgent"
+      ]
+    },
+    "Japan": {
+      "workplace_culture": {
+        "work_style": "Group-oriented, consensus-based, detail-focused, process-driven",
+        "hierarchy": "Strict hierarchical structure, seniority-based respect",
+        "meeting_culture": "Formal, decisions often made beforehand, meetings for confirmation",
+        "work_life_balance": "Long hours traditional, but changing with younger generations",
+        "decision_making": "Bottom-up consensus (nemawashi), takes time but ensures buy-in"
+      },
+      "communication_style": {
+        "directness": "Very indirect, context-heavy, reading between the lines essential",
+        "small_talk": "Important for building relationships, safe topics include seasons, food",
+        "feedback": "Extremely indirect, saving face is paramount",
+        "email_tone": "Very formal, polite, structured with proper greetings",
+        "conflict_resolution": "Avoid direct confrontation, use intermediaries when needed"
+      },
+      "business_etiquette": {
+        "greetings": "Bow (depth depends on status), business card exchange is ritual",
+        "dress_code": "Conservative business formal, attention to grooming",
+        "punctuality": "Extremely important, arrive early",
+        "business_cards": "Present and receive with both hands, study card before putting away",
+        "dining": "Business dinners important for relationships, complex etiquette"
+      },
+      "time_zone": "JST",
+      "working_hours": "9 AM - 5 PM official, but staying late is common",
+      "holidays": ["New Year", "Golden Week (late April-early May)", "Obon (August)", "New Year holidays"],
+      "tips": [
+        "Group harmony (wa) is paramount",
+        "Patience is essential - decisions take time",
+        "Learn basic Japanese phrases for respect",
+        "Gift-giving is important in business relationships",
+        "Never say 'no' directly - use 'it's difficult' or similar"
+      ]
+    },
+    "India": {
+      "workplace_culture": {
+        "work_style": "Relationship-focused, flexible, adaptive",
+        "hierarchy": "Respect for seniority and authority, but increasingly flat in tech sector",
+        "meeting_culture": "Can be flexible with time, relationship building important",
+        "work_life_balance": "Improving, especially in modern sectors, family very important",
+        "decision_making": "Often top-down, but consultative in progressive organizations"
+      },
+      "communication_style": {
+        "directness": "Indirect, especially with superiors, politeness valued",
+        "small_talk": "Essential for building trust, family, cricket, Bollywood popular",
+        "feedback": "Indirect, especially negative feedback, face-saving important",
+        "email_tone": "Formal and respectful, often quite verbose",
+        "conflict_resolution": "Avoid direct confrontation, use diplomacy"
+      },
+      "business_etiquette": {
+        "greetings": "Namaste or handshake, use titles and surnames",
+        "dress_code": "Conservative business formal, Western or traditional both acceptable",
+        "punctuality": "Improving in business settings, but flexibility common",
+        "business_cards": "Exchange respectfully, right hand or both hands",
+        "dining": "Vegetarian options often preferred, right hand for eating"
+      },
+      "time_zone": "IST",
+      "working_hours": "9:30 AM - 6 PM typical, but varies widely",
+      "holidays": ["Republic Day (Jan 26)", "Independence Day (Aug 15)", "Gandhi Jayanti (Oct 2)", "Diwali", "Holi"],
+      "tips": [
+        "Building personal relationships is crucial for business",
+        "Yes doesn't always mean yes - look for context",
+        "Respect for elders and authority important",
+        "Diversity is vast - regional differences significant",
+        "English widely spoken in business, but accents vary"
+      ]
+    },
+    "Australia": {
+      "workplace_culture": {
+        "work_style": "Casual, direct, team-oriented, practical",
+        "hierarchy": "Very flat, egalitarian, first names from day one",
+        "meeting_culture": "Informal but productive, get to the point",
+        "work_life_balance": "Highly valued, 20 days vacation minimum plus public holidays",
+        "decision_making": "Collaborative, practical considerations prioritized"
+      },
+      "communication_style": {
+        "directness": "Very direct and straightforward, no beating around the bush",
+        "small_talk": "Common and friendly, sports (especially cricket, AFL, rugby), outdoor activities",
+        "feedback": "Direct and candid, delivered in friendly manner",
+        "email_tone": "Casual and friendly, quick and to the point",
+        "conflict_resolution": "Address issues openly and directly"
+      },
+      "business_etiquette": {
+        "greetings": "Firm handshake, eye contact, friendly and casual",
+        "dress_code": "Smart casual common, formal business in traditional sectors",
+        "punctuality": "Important for meetings, but laid-back in social settings",
+        "business_cards": "Casual exchange, not ceremonial",
+        "dining": "Casual business lunches, shared bills common, tipping not obligatory"
+      },
+      "time_zone": "Multiple zones (AEST, ACST, AWST)",
+      "working_hours": "9 AM - 5 PM, early starts common",
+      "holidays": ["Australia Day (Jan 26)", "Anzac Day (Apr 25)", "Queen's Birthday (varies)", "Christmas"],
+      "tips": [
+        "Modesty valued - tall poppy syndrome (don't boast)",
+        "Humor and sarcasm common in workplace",
+        "Outdoor lifestyle important - respect for nature",
+        "Equality and fairness highly valued",
+        "Work hard, play hard mentality"
+      ]
+    }
+  },
+  "general_tips": {
+    "email_etiquette": {
+      "subject_lines": "Be clear and specific about the purpose",
+      "greetings": "Match the formality level of your recipient",
+      "body": "Be concise and organized, use paragraphs and bullet points",
+      "tone": "Professional but appropriate to the culture",
+      "closing": "Use appropriate sign-offs (Best regards, Kind regards, etc.)",
+      "response_time": "Within 24-48 hours for business emails"
+    },
+    "virtual_meeting_tips": [
+      "Test technology beforehand",
+      "Be aware of time zones when scheduling",
+      "Dress appropriately even for video calls",
+      "Minimize background distractions",
+      "Mute when not speaking",
+      "Use video when appropriate for engagement",
+      "Be mindful of internet connection quality"
+    ],
+    "cultural_adaptation": [
+      "Observe before acting in unfamiliar situations",
+      "Ask questions when unsure",
+      "Show genuine interest in local culture",
+      "Be patient with yourself during adjustment",
+      "Find a cultural mentor if possible",
+      "Keep an open mind and suspend judgment",
+      "Learn basic phrases in local language"
+    ]
+  }
+}
