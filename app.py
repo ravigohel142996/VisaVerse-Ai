@@ -126,13 +126,16 @@ st.markdown("""
 if 'page' not in st.session_state:
     st.session_state.page = "Home"
 
+# Define page list
+PAGES = ["Home", "Visa Assistant", "Document Checker", "Cultural Guide"]
+
 # Sidebar navigation
 with st.sidebar:
     st.markdown("## 🧭 Navigation")
     page = st.radio(
         "",
-        ["Home", "Visa Assistant", "Document Checker", "Cultural Guide"],
-        index=["Home", "Visa Assistant", "Document Checker", "Cultural Guide"].index(st.session_state.page),
+        PAGES,
+        index=PAGES.index(st.session_state.page),
         label_visibility="collapsed"
     )
     # Update session state when radio button changes
